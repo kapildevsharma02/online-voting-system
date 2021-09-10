@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <link rel = "stylesheet" href = "{% static 'css\home.css' %}">
+    <title>Welcome - Online Voting System</title>
+{% endblock title %}
+
+{% block nav %}
+    {% if user.is_superuser %}
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'result' %}">View Result</a>
+            </li>
+            {% comment %} <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Make Your Vote</a>
+            </li> {% endcomment %}
+        </ul>
+    {% endif %}
+{% endblock nav %}
+
+{% block content %}
+    <div class="container text-center">
+        <br /><br /><br />
+        <h1>SELECT YOUR CANDIDATE</h1>
+        <br />
+        <form method="POST">
+            {% csrf_token %}
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group" >
+
+            {{ form }}
+
+            </div>
+            {% comment %} <div class="btn-group" role="group" aria-label="Basic radio toggle button group" >
+                <input type="radio" class="btn-check" name="vote" id="b1" autocomplete="off" value="candidate1">
+                <label class="btn btn-outline-primary" for="b1">Candidate 1</label>
+
+                <input type="radio" class="btn-check" name="vote" id="b2" autocomplete="off" value="candidate2">
+                <label class="btn btn-outline-primary" for="b2">Candidate 2</label>
+
+                <input type="radio" class="btn-check" name="vote" id="b3" autocomplete="off" value="candidate3">
+                <label class="btn btn-outline-primary" for="b3">Candidate 3</label>
+            </div> {% endcomment %}
+            <br /><br />
+            <button class="btn btn-success mb-5 button" type="submit">VOTE</button>  
+        </form>
+    </div> 
+
+{% endblock content %}

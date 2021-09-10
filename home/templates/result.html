@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Results - Online Voting System</title>
+{% endblock title %}
+
+{% block nav %}
+    <div class="form-inline my-2 my-lg-0">
+        <a class="nav-link" href="{% url 'clear' %}">
+          <button class="btn btn-danger my-2 my-sm-0">Clear Voting Database</button>
+        </a>
+    </div> 
+{% endblock nav %}
+
+
+{% block content %}
+    <div class="container text-center">
+        <br />
+        <h1>Results</h1>
+        </br>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr class="row">
+                <th class="col-1">Rank</th>
+                <th class="col-8">Candidate</th>
+                <th class="col-3">Votes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if results %}   
+                    {% for obj in results %} 
+                        {% if forloop.counter == 1 %}                   
+                            <tr class="table-success row">
+                            <td class="col-1">{{forloop.counter}}</td>
+                            <td class="col-8">{{obj.candidate}}</td>
+                            <td class="col-3">{{obj.votes}}</td>
+                            </tr>
+                        {% else %}
+                            <tr class="table-danger row">
+                            <td class="col-1">{{forloop.counter}}</td>
+                            <td class="col-8">{{obj.candidate}}</td>
+                            <td class="col-3">{{obj.votes}}</td>
+                            </tr>
+                        {% endif %}  
+                    {% endfor %}
+                {% endif %} 
+            </tbody>
+        </table>
+    </div>    
+{% endblock content %}
